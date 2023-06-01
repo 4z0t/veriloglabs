@@ -15,4 +15,13 @@ module sw_sb_ctrl(
   input [15:0]  sw_i
 );
 
+always @(*) begin
+    if(req_i == 1 && WE_i == 0 && addr_i == 0x00)
+    begin
+         RD_o = {{16{0}}, sw_i};
+    end
+    else
+    RD_o = 32'hZZZZZZZZ;
+end
+
 endmodule
