@@ -18,4 +18,15 @@ module led_sb_ctrl(
 reg [15:0]  led_val;
 reg         led_mode;
 
+
+always @(posedge clk_i) 
+begin
+    if(WD_i & 32'hffff0000 == 0)
+    begin 
+        
+    end
+    else 
+    RD_o = 32'hZZZZZZZZ;
+end
+
 endmodule
