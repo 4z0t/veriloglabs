@@ -1,7 +1,8 @@
+`timescale 1ns / 1ps
 module fulladder(
     input A,
     input B,
-    output Pin,
+    input Pin,
     output S,
     output Pout
 ) ;
