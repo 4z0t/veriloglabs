@@ -1,27 +1,26 @@
 `timescale 1ns / 1ps
 `define bits5 [4:0]
-`define I32 [31:0]
 
 module riscv_core(
        input        clk_i,
        input        rst_i,
-       input  `I32  instr_i,
-       input  `I32  RD_i,
-       output `I32  WD_o,
-       output `I32  instr_addr_o,
-       output `I32  data_addr_o,
+       input [31:0] instr_i,
+       input [31:0] RD_i,
+       output [31:0]WD_o,
+       output [31:0] instr_addr_o,
+       output [31:0] data_addr_o,
        output       mem_req_o,                     
        output [2:0] mem_size_o, 
        output       WE_o
     );
 
-reg `I32 PC = 0; // program counter
+reg [31:0] PC = 0; // program counter
 
 assign instr_addr_o = PC;
 
-wire [1:0] op_a;
-wire [2:0] op_b;
-wire [4:0] alu_op;
+wire [1:0]op_a;
+wire [2:0]op_b;
+wire [4:0]alu_op;
 wire WE3;
 wire wb_src_sel;
 
@@ -49,16 +48,16 @@ wire jalr_instr;
 
 
 // imm's
-wire `I32 imm_I;
-wire `I32 imm_U;
-wire `I32 imm_S;
-wire `I32 imm_B;
-wire `I32 imm_J;
+wire [31:0]imm_I;
+wire [31:0]imm_U;
+wire [31:0]imm_S;
+wire [31:0]imm_B;
+wire [31:0]imm_J;
 
-wire [11:0] imm_I_;
-wire [11:0] imm_S_;
-wire [12:0] imm_B_;
-wire [21:0] imm_J_;
+wire [11:0]imm_I_;
+wire [11:0]imm_S_;
+wire [12:0]imm_B_;
+wire [21:0]imm_J_;
 
 assign imm_I_ = {instr_i[31:20]};
 assign imm_S_ = {instr_i[31:25], instr_i[11:7] };
@@ -83,19 +82,19 @@ assign RA2 = {instr_i[24:20]};
 assign WA = {instr_i[11:7]};
 
 // write data for register
-reg `I32 WD;
+reg [31:0] WD;
 
 // reg out
-wire `I32 RD1;
-wire `I32 RD2;
+wire [31:0] RD1;
+wire [31:0] RD2;
 
 // ALU arguments
-reg `I32 A1;
-reg `I32 A2;
+reg [31:0] A1;
+reg [31:0] A2;
 
 //ALU result
 wire ALU_flag;
-wire `I32 ALU_result;
+wire [31:0] ALU_result;
 
 
 always @(*) begin

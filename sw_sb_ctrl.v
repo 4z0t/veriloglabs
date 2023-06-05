@@ -1,7 +1,5 @@
 module sw_sb_ctrl(
-/*
-    Часть интерфейса модуля, отвечающая за подключение к системной шине
-*/
+
   input [31:0]  addr_i,
   input         req_i,
   input [31:0]  WD_i, // \
@@ -9,19 +7,11 @@ module sw_sb_ctrl(
   input         WE_i, // /
   output [31:0] RD_o,
 
-/*
-    Часть интерфейса модуля, отвечающая за подключение к периферии
-*/
+
   input [15:0]  sw_i
 );
 
-always @(*) begin
-    if(req_i == 1 && WE_i == 0 && addr_i == 0x00)
-    begin
-         RD_o = {{16{0}}, sw_i};
-    end
-    else
-    RD_o = 32'hZZZZZZZZ;
-end
+assign RD_o =  (req_i && !WE_i && addr_i == 0) ?  {{16{0}}, sw_i}: 32'hZZZZZZZZ;
+
 
 endmodule

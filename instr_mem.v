@@ -27,7 +27,7 @@ module instr_mem(
     
     reg [7:0] RAM [0:1023];
     
-    initial $readmemh("data_path.mem", RAM);
+    initial $readmemh("sw_led.mem", RAM);
     
     
     

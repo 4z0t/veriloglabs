@@ -21,26 +21,30 @@
 
 
 module data_mem(
+    input req,
     input clk,
     input WE,
     input [31:0] addr,
     input [31:0] write_data,
-    output [31:0] read_data
+    output reg [31:0] read_data
     );
     
     reg [7:0] RAM [0:1023];
-   
-    
-    
   
-  assign read_data = {RAM[addr+3],RAM[addr+2],RAM[addr+1],RAM[addr+0]};
-    
-    always @ (posedge clk)
+always @ (*)
     begin
-        if(WE)begin
-        {RAM[addr+3],RAM[addr+2],RAM[addr+1],RAM[addr+0]} <= write_data;
+        if(!WE && req)begin
+            if ((addr & 32'hffff_ff00) == 0)
+            read_data = addr == 0 ? 0 : {RAM[addr+3],RAM[addr+2],RAM[addr+1],RAM[addr+0]};
         end
-        
+    end
+    
+always @ (posedge clk)
+    begin
+        if(WE && req)begin
+            if ((addr & 32'hffff_ff00) == 0)
+                {RAM[addr+3],RAM[addr+2],RAM[addr+1],RAM[addr+0]} <= write_data;
+        end
     end
     
 endmodule
