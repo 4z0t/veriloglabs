@@ -16,7 +16,7 @@ fulladder ADDERS[31:0]
     .A(A)
     .B(B)
     .Pin(Pins)
-    .S(Pouts)
+    .S(S)
     .Pout(Pouts)
 );
 
