@@ -31,8 +31,8 @@ fulladder32 subber(
 always @(*) begin
 
     case(ALUOp)
-        `ALU_ADD: Result = A+B;
-        `ALU_SUB: Result = A-B;
+        `ALU_ADD: Result = Sum;
+        `ALU_SUB: Result = Sub;
         `ALU_SLL: Result = A << B[4:0];
         `ALU_SLTS: Result = $signed(A) < $signed(B);
         `ALU_SLTU: Result = A < B;
