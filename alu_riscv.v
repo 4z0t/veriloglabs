@@ -13,18 +13,18 @@ wire [31:0] Sub;
 
 
 fulladder32 adder(
-    .a_i(A),
-    .b_i(B),
-    .carry_i(1'b0),
-    .sum_o(Sum)
+    .A(A),
+    .B(B),
+    .Pin(1'b0),
+    .S(Sum)
     );
 
     
 fulladder32 subber(
-    .a_i(A),
-    .b_i(~B+1),
-    .carry_i(1'b0),
-    .sum_o(Sub)
+    .A(A),
+    .B(~B+1),
+    .Pin(1'b0),
+    .S(Sub)
     );
 
 

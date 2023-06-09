@@ -1,11 +1,11 @@
 `timescale 1ns / 1ps
 module fulladder32
 (
-    input [31:0] A,
-    input [31:0] B,
-    input Pin,
-    output [31:0] S,
-    output Pout
+    input [31:0]    A,
+    input [31:0]    B,
+    input           Pin,
+    output [31:0]   S,
+    output          Pout
 );
 
 
