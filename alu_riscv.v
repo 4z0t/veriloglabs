@@ -1,12 +1,12 @@
-`include "defines_riscv.v"
+`include "defines_riscv.vh"
 
 module alu_riscv (
   input       [31:0]  A,
   input       [31:0]  B,
   input       [4:0]   ALUOp,
-  output  reg         Flag,   // reg, потому что тебе потребуется мультиплексор,
-  output  reg [31:0]  Result  // описанный в case внутри always, 
-);                            // а в always, слева от "равно", всегда стоит reg
+  output  reg         Flag,   
+  output  reg [31:0]  Result  
+);                            
 
 wire  [31:0] Sum;
 wire [31:0] Sub;
@@ -31,8 +31,8 @@ fulladder32 subber(
 always @(*) begin
 
     case(ALUOp)
-        `ALU_ADD: Result = Sum;
-        `ALU_SUB: Result = Sub;
+        `ALU_ADD: Result = A+B;
+        `ALU_SUB: Result = A-B;
         `ALU_SLL: Result = A << B[4:0];
         `ALU_SLTS: Result = $signed(A) < $signed(B);
         `ALU_SLTU: Result = A < B;
